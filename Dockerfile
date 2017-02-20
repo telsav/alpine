@@ -1,5 +1,5 @@
 FROM alpine:edge
-MAINTAINER Daniel Guerra <daniel.guerra69@gmail.com>
+MAINTAINER Charlie Wang <272876047@qq.com>
 
 RUN apk add --update openssh util-linux dbus ttf-freefont xauth xf86-input-keyboard sudo\
     && rm  -rf /tmp/* /var/cache/apk/*
