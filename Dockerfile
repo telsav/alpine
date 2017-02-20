@@ -1,4 +1,4 @@
-FROM alpine:edge
+FROM alpine:latest
 MAINTAINER Charlie Wang <272876047@qq.com>
 
 RUN apk add --update openssh util-linux dbus ttf-freefont xauth xf86-input-keyboard sudo\
