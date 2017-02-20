@@ -9,5 +9,6 @@ RUN addgroup alpine \
 && echo "alpine    ALL=(ALL) ALL" >> /etc/sudoers
 
 ADD docker-entrypoint.sh /usr/sbin
+Run chmod + x /usr/sbin/docker-entrypoint.sh
 ENTRYPOINT ["docker-entrypoint.sh"]
 CMD ["/usr/sbin/sshd","-D"]
