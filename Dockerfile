@@ -1,16 +1,13 @@
-FROM alpine
-MAINTAINER Charlie Wang <272876047@qq.com>
+FROM alpine:edge
+MAINTAINER Daniel Guerra <daniel.guerra69@gmail.com>
 
-# add openssh and clean
-RUN apk add --update openssh \
-&& rm  -rf /tmp/* /var/cache/apk/*
-# add entrypoint script
+RUN apk add --update openssh util-linux dbus ttf-freefont xauth xf86-input-keyboard sudo\
+    && rm  -rf /tmp/* /var/cache/apk/*
+RUN addgroup alpine \
+&& adduser  -G alpine -s /bin/sh -D alpine \
+&& echo "alpine:alpine" | /usr/sbin/chpasswd \
+&& echo "alpine    ALL=(ALL) ALL" >> /etc/sudoers
+
 ADD docker-entrypoint.sh /usr/sbin
-# make sure we have permission
-RUN chmod +x /usr/sbin/docker-entrypoint.sh
-#make sure we get fresh keys
-RUN rm -rf /etc/ssh/ssh_host_rsa_key /etc/ssh/ssh_host_dsa_key
-
-EXPOSE 22
 ENTRYPOINT ["docker-entrypoint.sh"]
 CMD ["/usr/sbin/sshd","-D"]
